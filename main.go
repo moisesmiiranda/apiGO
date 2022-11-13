@@ -15,14 +15,29 @@ func main() { //endpoint que retornarar os usuarios
 }
 
 type User struct {
-	ID int 
-	Name string
+	ID int `json: "id"`
+	Name string `json: "name"`
 }
 //funcao que chama o endpoint dos usuarios
 func getUsers(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method != "GET" {
+		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
 	w.Header().Set("Content=type", "application/json")
-	json.NewEncoder(w).Encode([]User{{
-		ID: 1,
-        Name: "Moisés",
-	}})
+	json.NewEncoder(w).Encode([]User{
+		{
+            ID: 1,
+        	Name: "Moisés",
+		},
+		{	
+			ID: 2,
+			Name: "Mayara",
+		},
+		{
+			ID: 3,
+			Name: "Margareth",
+		},
+	})
 }
