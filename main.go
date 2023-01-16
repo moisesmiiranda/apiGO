@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func main() { //endpoint que retornarar os usuarios
+func main() { //endpoint que retornara os usuarios
 	http.HandleFunc("/users", getUsers)
 	fmt.Println("api is on :8080")
 
@@ -15,10 +15,11 @@ func main() { //endpoint que retornarar os usuarios
 }
 
 type User struct {
-	ID int `json: "id"`
+	ID   int    `json: "id"`
 	Name string `json: "name"`
 }
-//funcao que chama o endpoint dos usuarios
+
+// funcao que chama o endpoint dos usuarios
 func getUsers(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != "GET" {
@@ -28,15 +29,15 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content=type", "application/json")
 	json.NewEncoder(w).Encode([]User{
 		{
-            ID: 1,
-        	Name: "Moisés",
+			ID:   1,
+			Name: "Moisés",
 		},
-		{	
-			ID: 2,
+		{
+			ID:   2,
 			Name: "Mayara",
 		},
 		{
-			ID: 3,
+			ID:   3,
 			Name: "Margareth",
 		},
 	})
